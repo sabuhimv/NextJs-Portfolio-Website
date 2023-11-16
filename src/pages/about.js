@@ -5,28 +5,28 @@ import React, { useEffect, useRef } from 'react'
 import profilePic from '../../public/images/MyProfile.jpeg'
 import { useInView, useMotionValue, useSpring } from 'framer-motion'
 import Skills from '@/components/Skills'
+import Head1 from '@/components/Head1'
 
-
-const AnimatedNumbers = ({value}) => {
+const AnimatedNumbers = ({ value }) => {
     const ref = useRef(null)
 
     const motionValue = useMotionValue(0)
-    const springValue = useSpring(motionValue, {duration:3000})
+    const springValue = useSpring(motionValue, { duration: 3000 })
     const isInView = useInView(ref)
 
-    useEffect(()=> {
-        if(isInView) {
+    useEffect(() => {
+        if (isInView) {
             motionValue.set(value)
         }
-    },[isInView,value,motionValue])
+    }, [isInView, value, motionValue])
 
-    useEffect(()=>{
-        springValue.on("change",(latest)=>{
-            if(ref.current && latest.toFixed(0) <= value) {
+    useEffect(() => {
+        springValue.on("change", (latest) => {
+            if (ref.current && latest.toFixed(0) <= value) {
                 ref.current.textContent = latest.toFixed(0)
             }
         })
-    },[springValue,value])
+    }, [springValue, value])
 
     return <span ref={ref}></span>
 }
@@ -39,17 +39,18 @@ const about = () => {
                 <meta name="description" content="This is Description Page" />
             </Head>
 
-            <main className='flex w-full flex-col items-center justify-center'>
+            <main className='flex w-full flex-col items-center justify-center dark:text-light'>
                 <Layout className='pt-16'>
-                    <h1 className=' mb-16 inline-block w-full text-dark font-bold capitalize text-6xl'>Passion Fuels Purpose! </h1>
+
+                    <Head1 text={"Passion Fuels Purpose!"} className="mb-16"/>
                     
                     <div className='grid w-full grid-cols-8 gap-16'>
-                        
+
                         <div className='col-span-3 flex flex-col items-start justify-start'>
-                            <h2 className='mb-4 text-lg font-bold uppercase text-dark/75'>Biography</h2>
+                            <h2 className='mb-4 text-lg font-bold uppercase text-dark/75 dark:text-light/75'>Biography</h2>
 
                             <p className='my-4 font-medium'>
-                                Hi, I'm CodeBucks, a web developer and UI/UX designer with a passion for creating beautiful, functional, and user-centered digital experiences. With 4 years of experience in the field. I am always looking for new and innovative ways to bring my clients' visions to life.
+                                Hi, I'm Sabuhi Mammadov, a web developer with a passion for creating beautiful, functional, and user-centered digital experiences. I am always looking for new and innovative ways to bring my clients' visions to life.
                             </p>
 
                             <p className='my-4 font-medium'>
@@ -62,33 +63,38 @@ const about = () => {
                         </div>
 
                         <div className='col-span-3 relative h-max rounded-2xl border-2 border-solid  border-dark
-                        bg-light p-8  
+                        bg-light p-8  dark:bg-dark dark:border-light
                         '>
-                            <div className='absolute top-0 -right-3 -z-10 w-[102%] h-[103%] rounded-[2rem] bg-dark' />
-                            <Image src={profilePic} alt={"SebuhiMv"} className='w-full h-auto rounded-2xl' />
+                            <div className='absolute top-0 -right-3 -z-10 w-[102%] h-[103%] rounded-[2rem] bg-dark dark:bg-light' />
+                            <Image src={profilePic} alt={"SebuhiMv"} className='w-full h-auto rounded-2xl'
+                                priority
+                                sizes="(max-width: 768px) 100vw,
+                            (max-width:1200px) 50vw, 
+                            50vw"
+                            />
                         </div>
 
                         <div className='col-span-2 flex flex-col items-end justify-between'>
 
                             <div className='flex flex-col items-end justify-center'>
                                 <span className='inline-block text-7xl font-bold'>
-                                    <AnimatedNumbers value={50}/> +
+                                    <AnimatedNumbers value={50} /> +
                                 </span>
-                                <h2 className='text-xl font-medium capitalize text-dark/75'>Clients satisfed</h2>
+                                <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>Clients satisfed</h2>
                             </div>
 
                             <div className='flex flex-col items-end justify-center'>
                                 <span className='inline-block text-7xl font-bold'>
-                                    <AnimatedNumbers value={30}/> +
+                                    <AnimatedNumbers value={30} /> +
                                 </span>
-                                <h2 className='text-xl font-medium capitalize text-dark/75'>Projects completed</h2>
+                                <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>Projects completed</h2>
                             </div>
 
                             <div className='flex flex-col items-end justify-center'>
                                 <span className='inline-block text-7xl font-bold'>
-                                    <AnimatedNumbers value={3}/> +
+                                    <AnimatedNumbers value={3} /> +
                                 </span>
-                                <h2 className='text-xl font-medium capitalize text-dark/75'>lorem ipsum</h2>
+                                <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>lorem ipsum</h2>
                             </div>
 
                         </div>
@@ -97,7 +103,7 @@ const about = () => {
 
 
                     <div>
-                        <Skills/>
+                        <Skills />
                     </div>
                 </Layout>
             </main>
